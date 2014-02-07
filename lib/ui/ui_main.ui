@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1041</width>
+    <height>661</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>HDF QuickPlot</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#centralwidget {	background-color:#333; }
+#bg_browser { background-color:#444; }
+
+QCheckBox { spacing:10px; font-size: 14px; color:#fff; font-weight:bold; }
+QCheckBox:hover { color:red; }
+
+#label_programtitle { font-size:28px; color:white; font-style:italic; font-weight:bold; }
+
+#btn_minimize { font-size:16px; background-color:orange; border:0px; color:black; font-weight:bold; }
+#btn_minimize:hover { background-color:#fc5700; }
+#btn_exit {	font-size:16px; background-color:orange; border:0px; color:black; font-weight:bold; }
+#btn_exit:hover { background-color:#fc5700; }
+
+#btn_openfile { font-size:12px; background-color:orange; border:0px; color:black; font-weight:bold; }
+#btn_openfile:hover { background-color:#fc5700; }
+#value_progress { font-size:12px; color:white; font-weight:bold; }
+#btn_recentlyopened { font-size:12px; background-color:orange; border:0px; color:black; font-weight:bold; }
+#btn_recentlyopened:hover { background-color:#fc5700; }
+
+/*#mplwidget { border-radius:8px;}*/
+
+#bg_hdftree { border-radius:8px; background-color:black; }
+#list { color:#fff; font-size: 14px; font-weight: bold; background-color:#000; alternate-background-color: #333; selection-color:#fff; selection-background-color:red; }
+
+#label_currenthdf{ font-size:16px; color:white; font-style:italic; font-weight:bold; }
+#label_avtimerange { font-size:14px; font-weight:bold; color:#fc5700; }
+#value_timerange { font-size:14px; font-weight:bold; color:white; }
+#label_avindexrange { font-size:14px; font-weight:bold; color:#fc5700; }
+#value_indexrange { font-size:14px; font-weight:bold; color:white; }
+QSlider::groove:horizontal {
+	border-radius:5px;
+	height: 18px;
+	background-color:#B1B1B1;
+}
+QSlider::handle:horizontal {
+	border:2px solid #000;
+	border-radius:5px;
+	width:20px;
+	margin:2px;
+	background-color:#444;
+}
+
+#bg_controls { border-radius:8px; background-color:black; }
+#label_plotindexrange { font-size:16px; color:white; font-style:italic; font-weight:bold; }
+#label_startindex { font-size:14px; font-weight:bold; color:#fc5700; }
+#lineedit_startindex { font-size:14px; border:0px; font-weight:bold; color:black; }
+#lineedit_startindex:hover { border:1px solid orange; background-color:#fc5700; color:white; }
+#value_startindex { font-size:14px; font-weight:bold; color:white; }
+#label_stopindex { font-size:14px; font-weight:bold; color:#fc5700; }
+#lineedit_stopindex { font-size:14px; border:0px; font-weight:bold; color:black; }
+#lineedit_stopindex:hover { border:1px solid orange; background-color:#fc5700; color:white; }
+#value_stopindex { font-size:14px; font-weight:bold; color:white; }
+
+#btn_reset { font-size:14px; background-color:orange; border:0px; color:black; font-weight:bold; }
+#btn_reset:hover { background-color:#fc5700; }
+#btn_plot { font-size:14px; background-color:orange; border:0px; color:black; font-weight:bold; }
+#btn_plot:hover { background-color:#fc5700; }</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="bg_browser">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>1021</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkbox_separate">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>620</y>
+      <width>131</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>Separate Plots</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_reset">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>620</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkbox_3d">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>620</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>3D Plot</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_plot">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>620</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>Plot</string>
+    </property>
+   </widget>
+   <widget class="MatplotlibWidget" name="mplwidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>50</y>
+      <width>741</width>
+      <height>421</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_programtitle">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>1021</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>HDF QUICKPLOT</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_minimize">
+    <property name="geometry">
+     <rect>
+      <x>839</x>
+      <y>10</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>MINIMIZE</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_exit">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>10</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>EXIT</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bg_controls">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>480</y>
+      <width>1001</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineedit_startindex">
+    <property name="geometry">
+     <rect>
+      <x>931</x>
+      <y>530</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineedit_stopindex">
+    <property name="geometry">
+     <rect>
+      <x>931</x>
+      <y>580</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_startindex">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>510</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>START INDEX:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="value_startindex">
+    <property name="geometry">
+     <rect>
+      <x>751</x>
+      <y>530</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>---</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_stopindex">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>560</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>STOP INDEX:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="value_stopindex">
+    <property name="geometry">
+     <rect>
+      <x>751</x>
+      <y>580</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>---</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_plotindexrange">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>480</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PLOT INDEX RANGE</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="value_timerange">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>530</y>
+      <width>351</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>---</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_avtimerange">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>510</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AVAILABLE TIME RANGE:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_currenthdf">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>480</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CURRENT HDF STATISTICS</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_avindexrange">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>560</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AVAILABLE INDEX RANGE:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="value_indexrange">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>580</y>
+      <width>351</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>---</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="bg_hdftree">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>251</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QTreeWidget" name="list">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>60</y>
+      <width>231</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <attribute name="headerVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="headerDefaultSectionSize">
+     <number>240</number>
+    </attribute>
+    <attribute name="headerStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>DATA</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="btn_openfile">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>440</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>...open file(s)</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QSlider" name="slider_start">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>530</y>
+      <width>281</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="slider_stop">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>580</y>
+      <width>281</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="value_progress">
+    <property name="geometry">
+     <rect>
+      <x>137</x>
+      <y>440</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MatplotlibWidget</class>
+   <extends>QWidget</extends>
+   <header>lib.matplotlibwidget</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>buttonClickHandler()</slot>
+ </slots>
+</ui>

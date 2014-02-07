@@ -1,0 +1,22 @@
+pyhdfquickplot
+
+Description: This software was originally intended for quickly plotting HDF files associated with space
+weather data sources. Some functionality is incomplete such as an implementation of a HDF data source
+downloader within the program itself, three dimensional plotting, and simultaneous plotting of separate
+HDF files. This program was made before my familiarity with multi-threaded applications in PyQt (and
+multi-threaded applications in general) so this functionality is not present yet. As with all non-multi-
+threaded applications, expect a delay when plotting figures. Currently, when HDF4 files are opened, they
+are automatically converted to HDF5 which is the only format of HDF files that 'h5py' will understand.
+There may very well be some errors associated with this process.
+
+Requirements:
+> Windows-Based Computer*
+	- This can easily be changed because the only portion relying on the operating system is whether the Windows or Linux version of the HDF5 converter is being used.
+> Python 2.7+
+	- Have not tried with 3.3. More than likely works after a little bit of syntax
+	changing (such as print statements).
+> PyQt4
+	- Have not tried with the newer PyQt5 seeing as how it didn't exist when
+	this software was written.
+> Matplotlib
+> h5py
